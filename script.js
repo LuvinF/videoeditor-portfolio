@@ -14,14 +14,12 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
 const aboutIframe = document.querySelector(".video");
 const playBtn = document.querySelector(".play-btn");
 const playIcon = document.querySelector(".play-btn i");
-let aboutPlayerLoaded = false;
 
 if (aboutIframe) {
   const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(e => {
-      if (e.isIntersecting && !aboutPlayerLoaded) {
+      if (e.isIntersecting) {
         aboutIframe.src = aboutIframe.dataset.src;
-        aboutPlayerLoaded = true;
         obs.disconnect();
       }
     });
@@ -47,8 +45,7 @@ function playIframeVideo(iframe, icon) {
 /* EMAILJS */
 function sanitizeInput(value) {
   return value.replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")
-              .replace(/'/g,"&#039;").replace(/javascript:/gi,"")
-              .replace(/onerror=/gi,"").replace(/onload=/gi,"");
+              .replace(/'/g,"&#039;").replace(/javascript:/gi,"").replace(/onerror=/gi,"").replace(/onload=/gi,"");
 }
 if (typeof emailjs !== "undefined") emailjs.init("KI9rrTfJyUKRLqc08");
 
@@ -84,13 +81,12 @@ if (swiperSection && typeof Swiper !== "undefined") {
   swiperObs.observe(swiperSection);
 }
 
-/* VIDEO MODAL (EXPLORE & INDEX GRID) */
-function openVideo(cardOrUrl){
+/* VIDEO MODAL (EXPLORE) */
+function openVideo(url){
   const modal = document.getElementById("videoModal");
   const iframe = document.getElementById("modalIframe");
   if(!modal || !iframe) return;
-  let url = typeof cardOrUrl === "string" ? cardOrUrl : cardOrUrl.dataset.src;
-  iframe.src = url + "?autoplay=1";
+  iframe.src = url+"?autoplay=1";
   modal.classList.add("show");
 }
 function closeVideo(){
@@ -101,8 +97,9 @@ function closeVideo(){
   modal.classList.remove("show");
 }
 
-/* DISABLE DEV TOOLS */
+/* DISABLE DEV TOOLS 
 document.addEventListener("contextmenu", e=>e.preventDefault());
 document.addEventListener("keydown", e=>{
   if(e.key==="F12"||(e.ctrlKey&&e.shiftKey&&["I","J","C"].includes(e.key))||(e.ctrlKey&&e.key==="U")) e.preventDefault();
 });
+*/

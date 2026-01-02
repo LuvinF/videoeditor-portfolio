@@ -75,7 +75,7 @@ html {
   font-family: "MADE Soulmaze", sans-serif;
   font-size: 3.5rem;
   font-weight: bold;
-  color: #9e0e09;
+  color: #FFD700;
 }
 
 .nav-list {
@@ -107,7 +107,7 @@ html {
 }
 
 .nav-link:hover {
-  color: #9e0e09;
+  color: #FFD700;
 }
 /* End of Navbar */
 
@@ -182,7 +182,7 @@ html {
   font-size: 12rem;
   font-weight: 400;
   text-transform: uppercase;
-  color: #fff;
+  color: #FFD700;
   text-shadow: 0.3rem 0.3rem 0.6rem rgba(0, 0, 0, 0.5);
   position: absolute;
   width: 100%;
@@ -255,12 +255,13 @@ html {
 .banner-btn {
   width: 30rem;
   height: 6rem;
-  background: linear-gradient(to right, #9b0e0e, #7a1010);
-  color: #fff;
-  font-size: 2rem;
+  background: linear-gradient(to right, #FFD700, #E6C200);
+  color: #202122;
+  font-weight: bold;
+  font-size: 2.5rem;
   text-transform: uppercase;
   border-radius: 3rem;
-  border: 0.1rem solid #800505;
+  border: 0.1rem solid #FFD700;
   box-shadow: 1rem 2rem 3rem rgba(0, 0, 0, 0.5);
   text-shadow: 0.6rem 0.3rem 0.2rem rgba(0, 0, 0, 0.4);
   cursor: pointer;
@@ -351,7 +352,7 @@ html {
 .video-bar {
   height: 100%;
   width: 0;
-  background-color: #d30819;
+  background-color: #FFD700;
   transition: width 0.2s linear;
 }
 
@@ -511,7 +512,7 @@ html {
 }
 
 .videoSwiper .swiper-pagination-bullet-active {
-  background: #9e0e09;
+  background: #FFD700;
   opacity: 1;
 }
 .banner-bt{
@@ -519,12 +520,12 @@ html {
   margin: 3rem auto 0;
   width: 30rem;
   height: 6rem;
-  background: linear-gradient(to right, #9b0e0e, #7a1010);
+  background: linear-gradient(to right, #FFD700, #E6C200);
   color: #fff;
   font-size: 2rem;
   text-transform: uppercase;
   border-radius: 3rem;
-  border: 0.1rem solid #800505;
+  border: 0.1rem solid #FFD700;
   box-shadow: 1rem 2rem 3rem rgba(0, 0, 0, 0.5);
   text-shadow: 0.6rem 0.3rem 0.2rem rgba(0, 0, 0, 0.4);
   cursor: pointer;
@@ -755,7 +756,7 @@ html {
 
 .contact-details i {
   font-size: 5rem;
-  color: #7a1010;
+  color: #E6C200;
 }
 
 .contact-details h3 {
@@ -803,14 +804,17 @@ html {
 }
 
 .contact-form input[type="submit"] {
-  background-color: #7a1010;
+  background-color: #E6C200;
   text-transform: uppercase;
   cursor: pointer;
   transition: background-color 0.3s;
+  color: #202122;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 .contact-form input[type="submit"]:hover {
-  background-color: #5f0303;
+  background-color: #FFD700;
 }
 /* End of Section 4 */
 
@@ -826,7 +830,7 @@ html {
 .section-heading-line-title {
   width: 120px;
   height: 4px;
-  background: #ff0033;
+  background: #FFD700;
   margin: 1rem auto 4rem;
 }
 
@@ -866,8 +870,8 @@ html {
   z-index: 9999;
 }
 .video-modal-content iframe {
-  width: 80%;
-  height: 80%;
+  width: 80rem;
+  height: 80rem;
 }
 .video-modal.show {
   display: flex;
@@ -880,6 +884,7 @@ html {
 }
 
 @media (max-width: 768px) {
+  .video-heading-tittle
   .video-grid-section {
     padding: 4rem 2rem;
   }
@@ -916,7 +921,7 @@ html {
 }
 
 .footer-nav a:hover {
-  color: #862323;
+  color: #FFD700;
 }
 
 .copyright {
@@ -926,215 +931,185 @@ html {
 /* End of Footer */
 
 /* Responsive */
-@media (max-width: 1800px) {
-  .video-wrapper {
-    width: 90rem;
-    height: 45rem;
-    right: 10rem;
+/* ========================= Responsive CSS ========================= */
+
+/* ---------------- Tablet / Medium screens ---------------- */
+@media (max-width: 992px) {
+
+  /* Navbar */
+  .nav-link {
+    font-size: 2.8rem;
+    margin: 1.5rem 0;
   }
 
-  .section-2-paragraph {
-    width: 90rem;
-    right: 10rem;
-  }
-
-  .section-3 .section-heading-line {
-    margin-right: 3rem;
-  }
-}
-
-@media (max-width: 1650px) {
-  html {
-    font-size: 57%;
-  }
-
-  .video-wrapper {
-    width: 85rem;
-    height: 40rem;
-    right: 5rem;
-  }
-
-  .section-2-paragraph {
-    width: 85rem;
-    right: 5rem;
-    bottom: 10rem;
-  }
-}
-
-@media (max-width: 1500px) {
-  .section-heading-line {
-    display: none;
-  }
-}
-
-@media (max-width: 1400px) {
-  html {
-    font-size: 45%;
-  }
-
+  /* Banner */
   .banner-heading span {
-    font-size: 10rem;
+    font-size: 7rem;
+    letter-spacing: 2rem;
+  }
+  .banner-paragraph,
+  .banner-bt {
+    width: 80%;
+    font-size: 2rem;
   }
 
-  .banner-paragraph {
-    width: 45rem;
-    font-size: 3rem;
-  }
-
+  /* Sections 2, 3, 4 */
   .section-2,
   .section-3,
   .section-4 {
     flex-direction: column;
+    align-items: center;
   }
-
-  .section-2 {
-    height: 120vh;
-  }
-
-  .video-wrapper {
-    top: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80rem;
-  }
-
+  .video-wrapper,
   .section-2-paragraph {
+    width: 80%;
     left: 50%;
     transform: translateX(-50%);
-    width: 80rem;
   }
 
-  .section-3 {
-    height: auto;
-    padding: 5rem 0 10rem 0;
+  /* Swiper / Section 3 videos */
+  .videoSwiper iframe {
+    max-width: 100%;
+    aspect-ratio: 16 / 9;
   }
 
-  .section-3 .section-heading {
-    margin-bottom: 7rem;
+  /* Contact form */
+  .contact-wrapper,
+  .contact-form {
+    width: 90%;
+    padding: 0;
   }
-  .swiper-container {
+  .contact-details div {
     width: 100%;
-  }
-
-  .section-4 {
-    height: auto;
-    padding: 5rem 0;
+    margin: 2rem 0;
   }
 }
 
-@media (max-width: 900px) {
+/* ---------------- Small tablets / Phones ---------------- */
+@media (max-width: 768px) {
+
   html {
     font-size: 40%;
   }
 
-  .banner {
-    top: 25%;
+  /* Navbar menu smaller */
+  .nav-link {
+    font-size: 2.2rem;
+  }
+  .menu {
+    width: 3.5rem;
+    height: 3.5rem;
+    top: 1.5rem;
+    right: 2rem;
   }
 
-  .banner-heading {
-    height: 15rem;
-  }
-
+  /* Banner text scaling */
   .banner-heading span {
-    font-size: 8rem;
+    font-size: 5.5rem;
+    letter-spacing: 1.5rem;
   }
-
-  .footer {
-    padding: 0 5rem;
-  }
-
-  .footer-nav a {
+  .banner-paragraph,
+  .banner-bt {
+    width: 95%;
     font-size: 1.8rem;
   }
-}
-@media screen and (max-width: 800px) {
-  .column {
-    flex: 50%;
-    max-width: 50%;
+
+  /* Section 2 videos and paragraph */
+  .video-wrapper,
+  .section-2-paragraph {
+    width: 95%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .video-wrapper {
+    height: auto;
+  }
+  .section-2-paragraph {
+    bottom: 2rem;
+    font-size: 1.6rem;
+  }
+
+  /* Swiper videos */
+  .videoSwiper iframe {
+    max-width: 100%;
+  }
+
+  /* Contact form adjustments */
+  .contact-wrapper,
+  .contact-form {
+    width: 95%;
+  }
+  .contact-details div {
+    width: 100%;
+    margin: 1.5rem 0;
   }
 }
 
-@media (max-width: 700px) {
+/* ---------------- Very small phones ---------------- */
+@media (max-width: 500px) {
+
   html {
     font-size: 35%;
   }
 
-  .section-2 {
-    height: 100vh;
+  /* Banner heading smaller */
+  .banner-heading span {
+    font-size: 4rem;
+    letter-spacing: 1rem;
+  }
+  .banner-paragraph,
+  .banner-bt {
+    font-size: 1.5rem;
   }
 
+  /* Section 2 videos and paragraph */
+  .video-wrapper,
+  .section-2-paragraph {
+    width: 100%;
+  }
+
+  /* Contact details */
   .contact-details div {
-    margin: 3rem 2rem;
+    width: 100%;
+    margin: 1rem 0;
   }
 
+  /* Footer adjustments */
   .footer {
     flex-direction: column;
-    justify-content: center;
+    padding: 2rem;
   }
-
   .footer-nav {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
 }
-@media screen and (max-width: 600px) {
-  .column {
-    flex: 100%;
-    max-width: 100%;
-  }
-}
-@media (max-width: 500px) {
+
+/* ---------------- Extra small phones ---------------- */
+@media (max-width: 360px) {
+
   html {
     font-size: 30%;
   }
 
   .banner-heading span {
-    font-size: 4.5rem;
-    letter-spacing: 2rem;
+    font-size: 3.5rem;
+    letter-spacing: 0.8rem;
   }
 
-  @keyframes animateHeading {
-    0% {
-      transform: translateZ(8rem);
-      opacity: 0;
-      letter-spacing: 2rem;
-    }
-    3% {
-      transform: translateZ(0);
-      opacity: 1;
-      letter-spacing: 1rem;
-    }
-    25% {
-      transform: translateZ(0);
-      opacity: 1;
-      letter-spacing: 1rem;
-    }
-    28% {
-      transform: translateZ(8rem);
-      opacity: 0;
-      letter-spacing: 2rem;
-    }
-    100% {
-      transform: translateZ(8rem);
-      opacity: 0;
-      letter-spacing: 2rem;
-    }
+  .banner-paragraph,
+  .banner-bt {
+    font-size: 1.4rem;
   }
 
-  .video-wrapper {
-    width: 60rem;
+  .video-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 
-  .section-2-paragraph {
-    width: 60rem;
-  }
-
-  .contact-details div {
-    width: 18rem;
-    margin: 3rem 1rem;
-  }
-
-  .contact-form {
-    width: 60rem;
+  .video-card iframe {
+    height: 150px;
   }
 }
+
 /* End of Responsive */
+
