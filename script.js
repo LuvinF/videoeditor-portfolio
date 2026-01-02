@@ -1,85 +1,108 @@
 /* NAVBAR */
 const menu = document.querySelector(".menu");
 const navbar = document.querySelector(".navbar");
-
-menu.addEventListener("click", () => {
+if (menu && navbar) menu.addEventListener("click", () => {
   menu.classList.toggle("change");
   navbar.classList.toggle("change");
 });
 
-/* ABOUT VIDEO */
-const video = document.querySelector(".video");
-const playBtn = document.querySelector(".play-btn i");
-const videoBar = document.querySelector(".video-bar");
+/* FOOTER YEAR */
+const yearEl = document.getElementById("year");
+if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-document.querySelector(".play-btn").addEventListener("click", () => {
-  if (video.paused) {
-    video.play();
-    playBtn.className = "far fa-pause-circle";
-  } else {
-    video.pause();
-    playBtn.className = "far fa-play-circle";
-  }
-});
+/* ABOUT VIDEO LAZY LOAD */
+const aboutIframe = document.querySelector(".video");
+const playBtn = document.querySelector(".play-btn");
+const playIcon = document.querySelector(".play-btn i");
+let aboutPlayerLoaded = false;
 
-video.addEventListener("timeupdate", () => {
-  videoBar.style.width = `${(video.currentTime / video.duration) * 100}%`;
-});
+if (aboutIframe) {
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !aboutPlayerLoaded) {
+        aboutIframe.src = aboutIframe.dataset.src;
+        aboutPlayerLoaded = true;
+        obs.disconnect();
+      }
+    });
+  }, { threshold: 0.4 });
+  observer.observe(aboutIframe);
+}
 
-/* EMAILJS */
-(function () {
-  emailjs.init("KI9rrTfJyUKRLqc08");
-})();
-
-document.getElementById("contact-form").addEventListener("submit", function (e) {
-  e.preventDefault();
-
-  emailjs.sendForm(
-    "service_er634gp",
-    "template_d8hzzvs",
-    this,
-    "KI9rrTfJyUKRLqc08"
-  )
-  .then(() => {
-    alert("Message sent successfully!");
-    this.reset();
-  })
-  .catch((error) => {
-    console.error(error);
-    alert("Failed to send message.");
-  });
-});
-
-/* VIDEO SWIPER */
-const videoSwiper = new Swiper(".videoSwiper", {
-  slidesPerView: 1,
-  spaceBetween: 30,
-  loop: true,
-
-  pagination: {
-    el: ".swiper-pagination",
-    clickable: true,
-  },
-
-  navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
-  },
-
-  breakpoints: {
-    1024: { slidesPerView: 2 },
-  },
-
-  on: {
-    slideChangeTransitionStart: pauseAllVideos,
-  },
-});
-
-function pauseAllVideos() {
-  document.querySelectorAll(".videoSwiper iframe").forEach((iframe) => {
-    iframe.contentWindow.postMessage(
-      '{"event":"command","func":"pauseVideo","args":""}',
-      "*"
-    );
+if (playBtn && aboutIframe) {
+  playBtn.addEventListener("click", () => {
+    playIframeVideo(aboutIframe, playIcon);
   });
 }
+
+function playIframeVideo(iframe, icon) {
+  iframe.contentWindow.postMessage(JSON.stringify({
+    event: "command",
+    func: icon.classList.contains("fa-play-circle") ? "playVideo" : "pauseVideo"
+  }), "*");
+  icon.classList.toggle("fa-play-circle");
+  icon.classList.toggle("fa-pause-circle");
+}
+
+/* EMAILJS */
+function sanitizeInput(value) {
+  return value.replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")
+              .replace(/'/g,"&#039;").replace(/javascript:/gi,"")
+              .replace(/onerror=/gi,"").replace(/onload=/gi,"");
+}
+if (typeof emailjs !== "undefined") emailjs.init("KI9rrTfJyUKRLqc08");
+
+const contactForm = document.getElementById("contact-form");
+if (contactForm && typeof emailjs !== "undefined") {
+  contactForm.addEventListener("submit", function(e){
+    e.preventDefault();
+    this.from_name.value = sanitizeInput(this.from_name.value);
+    this.from_email.value = sanitizeInput(this.from_email.value);
+    this.message.value = sanitizeInput(this.message.value);
+    emailjs.sendForm("service_er634gp","template_d8hzzvs",this,"KI9rrTfJyUKRLqc08")
+      .then(()=>{ alert("Message sent!"); this.reset(); })
+      .catch(()=>{ alert("Failed to send message."); });
+  });
+}
+
+/* SWIPER LAZY INIT */
+const swiperSection = document.querySelector(".videoSwiper");
+if (swiperSection && typeof Swiper !== "undefined") {
+  const swiperObs = new IntersectionObserver((entries, obs)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        new Swiper(".videoSwiper", {
+          slidesPerView:1, spaceBetween:30, loop:true,
+          pagination:{el:".swiper-pagination",clickable:true},
+          navigation:{nextEl:".swiper-button-next",prevEl:".swiper-button-prev"},
+          breakpoints:{1024:{slidesPerView:2}}
+        });
+        obs.disconnect();
+      }
+    });
+  }, {threshold:0.2});
+  swiperObs.observe(swiperSection);
+}
+
+/* VIDEO MODAL (EXPLORE & INDEX GRID) */
+function openVideo(cardOrUrl){
+  const modal = document.getElementById("videoModal");
+  const iframe = document.getElementById("modalIframe");
+  if(!modal || !iframe) return;
+  let url = typeof cardOrUrl === "string" ? cardOrUrl : cardOrUrl.dataset.src;
+  iframe.src = url + "?autoplay=1";
+  modal.classList.add("show");
+}
+function closeVideo(){
+  const modal = document.getElementById("videoModal");
+  const iframe = document.getElementById("modalIframe");
+  if(!modal || !iframe) return;
+  iframe.src = "";
+  modal.classList.remove("show");
+}
+
+/* DISABLE DEV TOOLS */
+document.addEventListener("contextmenu", e=>e.preventDefault());
+document.addEventListener("keydown", e=>{
+  if(e.key==="F12"||(e.ctrlKey&&e.shiftKey&&["I","J","C"].includes(e.key))||(e.ctrlKey&&e.key==="U")) e.preventDefault();
+});
